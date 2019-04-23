@@ -16,4 +16,18 @@ from keras.datasets import mnist
 #load pre-shuffled MNIST data into train and test sets
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 #this is the shape of the dataset
+print X_train.shape # ==> (60000, 28, 28) there are 60000 samples in the data set and each image is 28 by 28 pixels
+#confirm results of shape by using matplot
+from matplotlib import pyplot as plt
+plt.imshow(X_train[0])
+#declaring a dimension for the depth of the input image (in this case the depth is 1)
+#####pre-processing##########
+#to reshape input data ie. transforming data from having shape (n, width, height) to (n, depth, width, height)
+X_train = X_train.reshape(X_train.shape[0], 1, 28, 28)
+X_test = X_test.reshape(X_test.shape[0], 1, 28, 28)
 print X_train.shape
+#convert data type to float32 and normalize data values to range [0, 1]
+X_train = X_train.astype('float32')
+X_test = X_test.astype('float32')
+X_train /= 255
+X_test /= 255
