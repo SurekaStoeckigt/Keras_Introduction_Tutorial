@@ -31,3 +31,23 @@ X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
+#input data is now ready for model training
+#shape of class label data
+#####pre-processing class labels for Keras##########
+print y_train.shape
+# labels for first 10 training samples
+print y_train[:10] # ytrain and ytest are not split into 10 distinct class labels. represented as a single array with class values
+# convert 1D class arrays to 10D class matrices
+Y_train = np_utils.to_categorical(y_train, 10)
+Y_test = np_utils.to_categorical(y_test, 10)
+print Y_train.shape
+#####Define model architecture##########
+#declare a Sequential model
+model = Sequential()
+#declare the input layer
+#CNN input layer
+model.add(Convolution2D(32, (3, 3), activation='relu', input_shape=(1, 28, 28)))
+#the input shape parameter is the shape of 1 sample. (depth, width, height) of each digit image.
+#first three parameters = number of convolution filters to use, number of rows in each convolution kernel, number of columns in each convolution kernel.
+#print shape of current model input
+print model.output_shape
